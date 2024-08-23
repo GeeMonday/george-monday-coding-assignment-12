@@ -1,0 +1,28 @@
+{
+  "name": "george_monday_coding_assignment_12",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "rollup": "rollup -c"
+  },
+  "author": "George Monday",
+  "license": "ISC",
+  "description": "A react component Library built by George Monday",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.4",
+    "react": "^18.3.1",
+    "rollup": "^4.21.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tslib": "^2.7.0",
+    "typescript": "^5.5.4"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts"
+}
