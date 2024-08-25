@@ -2,6 +2,9 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
+import postcss from "rollup-plugin-postcss";
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';  // Import peerDepsExternal plugin
 import { readFileSync } from 'fs';
 
 // Read package.json content
@@ -15,22 +18,27 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
+        plugins: [terser()],  // Apply Terser for CommonJS output
       },
       {
         file: packageJson.module,
         format: "esm",
         sourcemap: true,
+        plugins: [terser()],  // Apply Terser for ES Module output
       },
     ],
     plugins: [
+      peerDepsExternal(),  // Exclude peer dependencies from the bundle
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
+      postcss(),
     ],
   },
   {
     input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
+    external: [/\.css$/],
   },
 ];
